@@ -71,3 +71,4 @@ app.jsなどに直接指定など
 ## 参考
 - [サービスアカウントの作成方法](https://cloud.google.com/iam/docs/creating-managing-service-accounts#iam-service-accounts-create-gcloud)
 - [サービスアカウントキーの作成方法](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#iam-service-account-keys-create-gcloud)
+- [構成の参考](https://zenn.dev/kimihiro_n/articles/06bd36a592a942)

@@ -4,10 +4,11 @@
   "main": "app.js",
   "license": "MIT",
   "engines": {
-    "node": "16.13.x"
+    "node": ">=16.13.x"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "todo": "node index.js"
   },
   "dependencies": {
     "@google-cloud/datastore": "^6.6.2",
