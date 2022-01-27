@@ -2,31 +2,14 @@
 
 const bodyParser = require('body-parser');
 const express = require('express');
-// const todomvc = require('todomvc');
-// const todomvcApi = require('todomvc-api');
 
 const todos = require('./todos.js');
 
 const app = module.exports.app = express();
-const api = module.exports.api = express();
+const api = express.Router();
 module.exports.port = process.env.PORT || 8080;
 
-api.use(bodyParser.json());
-// app.use('/api', [todomvcApi.server, api]);
-
-// Declare the root route *before* inserting TodoMVC as middleware to prevent
-// the TodoMVC app from overriding it.
-// app.get('/', function (req, res) {
-//   res.redirect('/examples/angularjs');
-// });
-// app.use(todomvc);
-
-// Respond to the App Engine health check
-app.get('/_ah/health', function (req, res) {
-  res.status(200)
-    .set('Content-Type', 'text/plain')
-    .send('ok');
-});
+app.use(bodyParser.json());
 
 // API Routes.
 api.get('/', function (req, res) {
@@ -75,4 +58,14 @@ function _handleApiResponse (res, successStatus) {
     }
     res.json(payload);
   };
+}
+
+// docker-compose開発環境用
+if(process.env.DATASTORE_EMULATOR_HOST) {
+  app.use('/api/v1', api);
+}
+// 本番環境
+else {
+  app.use('/', express.static(__dirname + '/staticDir'));
+  app.use('/api/v1', api);
 }
