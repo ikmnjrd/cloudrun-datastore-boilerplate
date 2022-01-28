@@ -39,7 +39,7 @@ $ gcloud iam service-accounts keys create <key-file-name> \
     --iam-account=<service_account-name>@<project-id>.iam.gserviceaccount.com
 ```
 
-`gcloud iam service-accounts keys create datastore1-iam-key-file.json --iam-account=datastore1@node-datastore-test-111.iam.gserviceaccount.com`
+`gcloud iam service-accounts keys create datastore-iam-key.json --iam-account=datastore1@node-datastore-test-111.iam.gserviceaccount.com`
 
 
 
@@ -54,12 +54,12 @@ $ gcloud iam service-accounts keys list \
 ### サービスアカウントキーファイルのパーミッションを変更する
 初期状態は600になっている。
 ```
--rw-------    1 ike  staff   2344  1 24 03:32 datastore1-iam-key-file.json
+-rw-------    1 ike  staff   2344  1 24 03:32 datastore-iam-key.json
 ```
-`$ chmod 660 datastore1-iam-key-file.json`
+`$ chmod 660 datastore-iam-key.json`
 
 ## サービスアカウントキーファイルのパス指定
-`$ echo 'export GOOGLE_APPLICATION_CREDENTIALS="$PWD/datastore1-iam-key-file.json"' >> ~/.bash_profile`
+`$ echo 'export GOOGLE_APPLICATION_CREDENTIALS="$PWD/datastore-iam-key.json"' >> ~/.bash_profile`
 `$ source ~/.bash_profile`
 or
 app.jsなどに直接指定など
@@ -67,6 +67,21 @@ app.jsなどに直接指定など
 
 ## 設定完了確認
 `$ yarn start`
+
+
+## Cloud Build
+`$ gcloud builds submit --tag asia-northeast1-docker.pkg.dev/<you-project-id>/<repository-name>/<image-name>:tag1`
+`$ gcloud builds submit --tag asia-northeast1-docker.pkg.dev/node-datastore-test-111/node-datastore-test-repo/node-datastore-test-image:tag1`
+
+## Cloud Run へデプロイ
+`$ gcloud run deploy <service-name> --image asia-northeast1-docker.pkg.dev/<you-project-id>/<repository-name>/<image-name>:tag1 --region asia-northeast1 --platform managed --allow-unauthenticated`
+
+`$ gcloud run deploy test-service --image asia-northeast1-docker.pkg.dev/node-datastore-test-111/node-datastore-test-repo/node-datastore-test-image:tag1 --region asia-northeast1 --platform managed --allow-unauthenticated`
+
+## W.I.P
+* Typescript化
+* ホットリロード
+* 本番環境確認
 
 ## 参考
 - [サービスアカウントの作成方法](https://cloud.google.com/iam/docs/creating-managing-service-accounts#iam-service-accounts-create-gcloud)

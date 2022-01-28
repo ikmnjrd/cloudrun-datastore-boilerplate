@@ -16,31 +16,12 @@ services:
       - ./front:/opt/front
       - /opt/front/node_modules
     entrypoint: "/bin/sh -c 'yarn install && yarn run dev'"
-  # env:
-  #   image: "golang:1.15"
-  #   environment:
-  #     - GO111MODULE=on
-  #     - DATASTORE_EMULATOR_HOST=datastore:8059
-  #     - DATASTORE_PROJECT_ID=local-app
-  #     - TWITTER_CONSUMER_KEY
-  #     - TWITTER_CONSUMER_SECRET
-  #     - PORT=8080
-  #     - APP_URL=http://localhost:${LOCAL_PORT}
-  #   working_dir: /opt/app
-  #   volumes:
-  #     - ./server:/opt/app
-  #   links:
-  #     - datastore:datastore
-  #   command: /bin/sh -c 'go get -u github.com/cosmtrek/air && air'
 
   env:
     image: "node:alpine"
     environment:
-      # - GO111MODULE=on
       - DATASTORE_EMULATOR_HOST=datastore:8059
       - DATASTORE_PROJECT_ID=node-datastore-test-111
-      # - TWITTER_CONSUMER_KEY
-      # - TWITTER_CONSUMER_SECRET
       - PORT=8080
       - APP_URL=http://localhost:${LOCAL_PORT}
     working_dir: /opt/app
@@ -48,7 +29,7 @@ services:
       - ./server:/opt/app
     links:
       - datastore:datastore
-    command: /bin/sh -c 'yarn install && yarn run todo'
+    command: /bin/sh -c 'yarn install && yarn run start'
   datastore:
     image: google/cloud-sdk
     environment:

@@ -7,4 +7,6 @@ front/public/workbox-d6d90c3a.js
 *.js.map
 
 node_modules
-server/datastore1-iam-key-file.json
+server/datastore-iam-key.json
+
+description.drawio
