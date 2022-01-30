@@ -12,6 +12,7 @@ const IndexPage = () => {
   return (
   <Layout title="Home | Next.js + TypeScript Example">
     <h1 className={styles.red}>Hello Next.js 👋</h1>
+    <div>test</div>
     <p>
       <Link href="/about">
         <a>About</a>
