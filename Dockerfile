@@ -17,5 +17,6 @@ WORKDIR /app
 COPY ./server .
 RUN rm -rf node_modules && yarn install --frozen-lockfile
 COPY --from=front_builder /app/out /app/staticDir
+RUN yarn run build
 EXPOSE 8080
 ENTRYPOINT ["yarn","run","start"]
