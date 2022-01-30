@@ -37,3 +37,7 @@ jobs:
     - name: Push
       run: |
         docker push asia-northeast1-docker.pkg.dev/node-datastore-test-111/node-datastore-test-repo/node-datastore-test-image:${{ env.TAG }}
+
+    - name: Deploy
+      run: |
+        gcloud run deploy test-service --image asia-northeast1-docker.pkg.dev/node-datastore-test-111/node-datastore-test-repo/node-datastore-test-image:${{ env.TAG }} --region asia-northeast1 --platform managed --allow-unauthenticated
