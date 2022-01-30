@@ -81,7 +81,6 @@ app.jsなどに直接指定など
 ## W.I.P
 * Typescript化
 * ホットリロード
-* 本番環境確認
 
 ## 参考
 - [サービスアカウントの作成方法](https://cloud.google.com/iam/docs/creating-managing-service-accounts#iam-service-accounts-create-gcloud)
