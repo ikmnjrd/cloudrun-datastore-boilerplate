@@ -1,0 +1,39 @@
+name: Build and Push Image
+
+on:
+  push:
+    tags:
+    - "*"
+
+jobs:
+  build-and-publish:
+    name: Build and Push docker image
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.ref }}
+
+    - name: Setup Google Cloud
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        service_account_key: ${{ secrets.GCLOUD_AUTH }}
+        project_id: node-datastore-test-111
+
+    - name: Configure docker for artifact registry
+      run: |
+        gcloud auth configure-docker asia-northeast1-docker.pkg.dev
+
+    - name: set TAG
+      run: |
+        echo "TAG=$(echo $GITHUB_REF | awk -F/ '{print $NF}')" >> $GITHUB_ENV
+
+    - name: Build
+      run: |
+        docker build -t asia-northeast1-docker.pkg.dev/node-datastore-test-111/node-datastore-test-repo/node-datastore-test-image:${{ env.TAG }} ./
+
+    - name: Push
+      run: |
+        docker push asia-northeast1-docker.pkg.dev/node-datastore-test-111/node-datastore-test-repo/node-datastore-test-image:${{ env.TAG }}
