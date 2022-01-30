@@ -3,7 +3,6 @@
 ![構成図](./description.png)
 
 
-
 ## CI/CD
 
 Google Cloud Build appのインストール
@@ -12,7 +11,7 @@ Google Cloud Build appのインストール
 
 ![hoge](https://i.gyazo.com/08185321022a280a202a708a0c85320c.png)
 
-ほげ
+
 
 
 ## 参考
