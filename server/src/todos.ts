@@ -3,7 +3,7 @@
 const { Datastore } = require('@google-cloud/datastore');
 const datastore = new Datastore();
 
-datastore.auth.getProjectId((err, projectId) => {
+datastore.auth.getProjectId((err:any, projectId:any) => {
   if (err) {
     console.error('Error detecting current project.');
     console.error(err);
@@ -13,20 +13,20 @@ datastore.auth.getProjectId((err, projectId) => {
 
 const LIST_NAME = 'default-list';
 
-function entityToTodo (entity) {
+function entityToTodo (entity:any) {
   const key = entity[datastore.KEY];
 
   entity.id = key.name || key.id;
   return entity;
 }
 
-function saveTodo (key, data, callback) {
+function saveTodo (key:any, data:any, callback:any) {
   delete data.id;
 
   datastore.save({
     key: key,
     data: data
-  }, function (err) {
+  }, function (err:any) {
     if (err) {
       callback(err);
       return;
@@ -37,19 +37,19 @@ function saveTodo (key, data, callback) {
   });
 }
 
-module.exports = {
-  delete: function (id, callback) {
+export default {
+  delete: function (id:any, callback:any) {
     const key = datastore.key(['TodoList', LIST_NAME, 'Todo', id]);
 
-    datastore.delete(key, function (err) {
+    datastore.delete(key, function (err:any) {
       callback(err || null);
     });
   },
 
-  deleteCompleted: function (callback) {
+  deleteCompleted: function (callback:any) {
     const transaction = datastore.transaction();
 
-    transaction.run(function (err, transaction) {
+    transaction.run(function (err:any, transaction:any) {
       if (err) {
         console.error(err);
       }
@@ -57,13 +57,13 @@ module.exports = {
         .hasAncestor(datastore.key(['TodoList', LIST_NAME]))
         .filter('completed', true);
 
-      query.run(function (err, items) {
+      query.run(function (err:any, items:any) {
         if (err) {
           transaction.rollback(callback);
           return;
         }
 
-        transaction.delete(items.map(function (todo) {
+        transaction.delete(items.map(function (todo:any) {
           return todo.key;
         }));
 
@@ -72,10 +72,10 @@ module.exports = {
     });
   },
 
-  get: function (id, callback) {
+  get: function (id:any, callback:any) {
     const key = datastore.key(['TodoList', LIST_NAME, 'Todo', id]);
 
-    datastore.get(key, function (err, item) {
+    datastore.get(key, function (err:any, item:any) {
       if (err) {
         callback(err);
         return;
@@ -93,11 +93,11 @@ module.exports = {
     });
   },
 
-  getAll: function (callback) {
+  getAll: function (callback:any) {
     const query = datastore.createQuery('Todo')
       .hasAncestor(datastore.key(['TodoList', LIST_NAME]));
 
-    query.run(function (err, items) {
+    query.run(function (err:any, items:any) {
       if (err) {
         callback(err);
         return;
@@ -107,7 +107,7 @@ module.exports = {
     });
   },
 
-  insert: function (data, callback) {
+  insert: function (data: any, callback: any) {
     const key = datastore.key(['TodoList', LIST_NAME, 'Todo']);
 
     data.completed = false;
@@ -115,7 +115,7 @@ module.exports = {
     saveTodo(key, data, callback);
   },
 
-  update: function (id, data, callback) {
+  update: function (id: any, data: any, callback: any) {
     const key = datastore.key(['TodoList', LIST_NAME, 'Todo', id]);
 
     saveTodo(key, data, callback);

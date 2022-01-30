@@ -78,10 +78,6 @@ app.jsなどに直接指定など
 
 `$ gcloud run deploy test-service --image asia-northeast1-docker.pkg.dev/node-datastore-test-111/node-datastore-test-repo/node-datastore-test-image:tag1 --region asia-northeast1 --platform managed --allow-unauthenticated`
 
-## W.I.P
-* Typescript化
-* ホットリロード
-
 ## 参考
 - [サービスアカウントの作成方法](https://cloud.google.com/iam/docs/creating-managing-service-accounts#iam-service-accounts-create-gcloud)
 - [サービスアカウントキーの作成方法](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#iam-service-account-keys-create-gcloud)

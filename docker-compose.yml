@@ -29,7 +29,7 @@ services:
       - ./server:/opt/app
     links:
       - datastore:datastore
-    command: /bin/sh -c 'yarn install && yarn run start'
+    command: /bin/sh -c 'yarn install && yarn run watch'
   datastore:
     image: google/cloud-sdk
     environment:

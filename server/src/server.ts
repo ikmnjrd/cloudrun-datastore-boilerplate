@@ -1,13 +1,13 @@
 'use strict';
 
-const bodyParser = require('body-parser');
-const express = require('express');
+import bodyParser from 'body-parser';
+import express from 'express';
 
-const todos = require('./todos.js');
+import todos from './todos';
 
-const app = module.exports.app = express();
+export const app: express.Express = express();
 const api = express.Router();
-module.exports.port = process.env.PORT || 8080;
+export const port = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
 
@@ -16,7 +16,6 @@ api.get('/', function (req, res) {
   res.status(200)
     .set('Content-Type', 'text/plain')
     .send('ok');
-  console.log("hoge");
 });
 
 api.get('/todos', function (req, res) {
@@ -46,8 +45,9 @@ api.delete('/todos/:id', function (req, res) {
   todos.delete(id, _handleApiResponse(res, 204));
 });
 
-function _handleApiResponse (res, successStatus) {
-  return function (err, payload) {
+
+const _handleApiResponse = (res: any, successStatus?: number): Function => {
+  return ((err: any, payload: any) => {
     if (err) {
       console.error(err);
       res.status(err.code).send(err.message);
@@ -57,7 +57,7 @@ function _handleApiResponse (res, successStatus) {
       res.status(successStatus);
     }
     res.json(payload);
-  };
+  });
 }
 
 // docker-compose開発環境用
