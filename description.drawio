@@ -171,17 +171,6 @@
                         <mxPoint x="35" y="5" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="112" value="" style="endArrow=classic;html=1;shadow=1;labelBorderColor=default;fontSize=24;fontColor=#000000;strokeColor=#000000;" edge="1" parent="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="760" y="580" as="sourcePoint"/>
-                        <mxPoint x="860" y="580" as="targetPoint"/>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="113" value="" style="shape=message;html=1;outlineConnect=0;shadow=0;fontSize=24;fontColor=#000000;" vertex="1" parent="112">
-                    <mxGeometry width="20" height="14" relative="1" as="geometry">
-                        <mxPoint x="-10" y="-7" as="offset"/>
-                    </mxGeometry>
-                </mxCell>
                 <mxCell id="114" value="" style="endArrow=classic;html=1;fontSize=17;entryX=0.05;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="103" target="102">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="148" y="420" as="sourcePoint"/>
