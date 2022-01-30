@@ -60,13 +60,20 @@ const _handleApiResponse = (res: any, successStatus?: number): Function => {
   });
 }
 
-// docker-compose開発環境用
+/* docker-compose開発環境用 */
 if(process.env.DATASTORE_EMULATOR_HOST) {
   app.use('/api/v1', api);
 }
-// 本番環境
+/* 本番環境 */
 else {
   // nodeプロセスのカレントディレクトリ
   app.use('/', express.static(process.cwd() + '/staticDir'));
+  /* CORS対応 */
+  // api.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+  //   res.header("Access-Control-Allow-Origin", "https://developer.mozilla.org");
+  //   res.header("Access-Control-Allow-Methods", "*");
+  //   res.header("Access-Control-Allow-Headers", "*");
+  //   next();
+  // });
   app.use('/api/v1', api);
 }
