@@ -16,7 +16,6 @@ api.get('/', function (req, res) {
     res.status(200)
         .set('Content-Type', 'text/plain')
         .send('ok');
-    console.log("hoge");
 });
 api.get('/todos', function (req, res) {
     todos_1.default.getAll(_handleApiResponse(res));
@@ -58,6 +57,8 @@ if (process.env.DATASTORE_EMULATOR_HOST) {
 }
 // 本番環境
 else {
-    exports.app.use('/', express_1.default.static(__dirname + '/staticDir'));
+    console.log(process.cwd());
+    console.log(__dirname);
+    exports.app.use('/', express_1.default.static(process.cwd() + '/staticDir'));
     exports.app.use('/api/v1', api);
 }

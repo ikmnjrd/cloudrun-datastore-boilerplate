@@ -66,6 +66,7 @@ if(process.env.DATASTORE_EMULATOR_HOST) {
 }
 // 本番環境
 else {
-  app.use('/', express.static(__dirname + '/staticDir'));
+  // nodeプロセスのカレントディレクトリ
+  app.use('/', express.static(process.cwd() + '/staticDir'));
   app.use('/api/v1', api);
 }
